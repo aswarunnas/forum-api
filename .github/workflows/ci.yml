@@ -22,7 +22,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install migrate and test
       run: |
-        cd ~/forum-api
+        cd forum-api
         git pull origin master
         npm install
         npm run migrate up
