@@ -3,6 +3,7 @@ const NotFoundError = require('../../Commons/exceptions/NotFoundError');
 const CommentRepository = require('../../Domains/comments/CommentRepository');
 const AddedComment = require('../../Domains/comments/entities/AddedComment');
 const GetComment = require('../../Domains/comments/entities/GetComment');
+const { mapGetCommentsDBToModel } = require('../../utils');
 
 class CommentRepositoryPostgres extends CommentRepository {
   constructor(pool, idGenerator) {
@@ -17,8 +18,8 @@ class CommentRepositoryPostgres extends CommentRepository {
     const date = new Date().toISOString();
 
     const query = {
-      text: 'INSERT INTO comments VALUES($1,$2,$3,$4,$5) RETURNING id, content, owner',
-      values: [id, content, date, credentialId, threadId],
+      text: 'INSERT INTO comments VALUES($1,$2,$3,$4,$5,$6) RETURNING id, content, owner',
+      values: [id, content, date, credentialId, threadId, '0'],
     };
 
     const result = await this._pool.query(query);
@@ -68,7 +69,7 @@ class CommentRepositoryPostgres extends CommentRepository {
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < result.rowCount; i++) {
       const getComment = new GetComment({
-        ...result.rows[i],
+        ...result.rows.map(mapGetCommentsDBToModel)[i],
       });
       comments.push({ ...getComment });
     }

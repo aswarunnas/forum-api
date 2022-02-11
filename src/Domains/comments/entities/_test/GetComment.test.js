@@ -19,7 +19,7 @@ describe('A getComment entities', () => {
       username: 'username',
       date: 'date',
       content: 1234,
-      is_delete: '0',
+      isDelete: '0',
     };
 
     // action and assert
@@ -33,7 +33,7 @@ describe('A getComment entities', () => {
       username: 'username',
       date: 'date',
       content: 'content',
-      is_delete: '0',
+      isDelete: '0',
     };
 
     // action
@@ -55,7 +55,7 @@ describe('A getComment entities', () => {
       username: 'username',
       date: 'date',
       content: 'content',
-      is_delete: '1',
+      isDelete: '1',
     };
 
     // action

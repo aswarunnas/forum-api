@@ -2,7 +2,7 @@
 
 exports.shorthands = undefined;
 
-exports.up = pgm => {
+exports.up = (pgm) => {
   pgm.addColumn('comments', {
     is_delete: {
       type: 'VARCHAR(2)',
@@ -12,6 +12,6 @@ exports.up = pgm => {
   pgm.sql("UPDATE comments SET is_delete = '0' WHERE is_delete = NULL");
 };
 
-exports.down = pgm => {
+exports.down = (pgm) => {
   pgm.dropColumn('comments', 'is_delete');
 };

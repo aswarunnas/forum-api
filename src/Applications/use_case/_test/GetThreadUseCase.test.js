@@ -19,7 +19,7 @@ describe('GetThreadUseCase', () => {
       username: 'username',
       date: 'date',
       content: 'content',
-      is_delete: '0',
+      isDelete: '0',
     });
 
     const comments = [
